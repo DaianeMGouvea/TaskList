@@ -1,0 +1,228 @@
+// Place all the styles related to the Tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color:  #f3f5f7;
+    font-family: "Lexend Deca";
+    color: #1A202C;
+}
+input{
+    border: none;
+    background-color: transparent;
+}
+
+input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+p{
+    font-size: 14px;
+}
+
+button{
+    border: none;
+}
+
+
+#title-task{
+    color: #F9F9F9;
+    font-size: 40px;
+    margin: 0;
+    
+}
+
+
+.input-custom{
+    padding-left: 2vw;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;   
+    box-shadow: 2px 2px 4px rgba(0,0,0, 0.2);
+}
+
+::-webkit-input-custom-placeholder{
+    color: #f3f5f7;
+}
+
+.add-task{
+    width: 100%;
+    height: 5vh;
+    color: white;
+    opacity: 0.5;
+    font-size: 20px;
+    opacity: 1;
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
+
+.add-task::before{
+    opacity: 1;
+}
+
+.col-custom{
+    flex-direction: column;
+    display: flex;
+}
+
+.row-custom{
+    flex-direction: row;
+    display: flex;
+}
+
+.justify-content-between-custom{
+    justify-content: space-between;
+}
+
+.header-custom{
+    background: linear-gradient(90deg, #5de351, #3ea2d8);
+    height: 38vh;
+    width: 100%;
+}
+
+.navbar-custom{
+    width: 40%;
+    height: 60%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.content-custom{
+    padding-top: 10vh;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f5f7;
+}
+
+
+.icon-pen{
+    color: #22a8b8;
+    font-size: 40px;
+}
+.icon-square{ 
+    cursor: pointer;
+    color: white;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    transition-duration: 0.7s;
+
+    &.trash{
+        border-radius: 5px;
+        background-color: #f95d5d;
+        width: 35px;
+        height: 35px;
+    }
+    &.plus{
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: #3ea2d8;
+        width: 60px;
+        height: 50px;
+        
+    }
+}
+.rotate-custom{
+    transition-duration: 0.5s;
+}
+.icon-square:hover .rotate{
+    transform: rotate(90deg);
+
+}
+.options-custom{
+    width: 100px;
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition-duration: 0.3s;
+}
+
+.container-custom{
+    padding: 2vh 3vh;
+    width: 40%;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(19, 19, 31, 0.05);
+    border-radius: 5px;
+    margin-bottom: 5vh;
+    transition-duration: 0.3s;
+    
+}
+
+.container-custom:hover{
+    box-shadow: 5px 5px 5px lightgrey;
+    .options-custom{
+        opacity: 1;
+    }
+}
+
+.bg-logo-tasks{
+    position: absolute;
+    top: 12vh;
+    left: 5vh;
+    font-size: 25vh;
+    transform: rotate(-20deg);
+    opacity: 0.2;
+
+}
+
+.bg-logo-feather{
+    position: absolute;
+    top: -20.5vh;
+    left: 21vh;
+    font-size: 35vh;
+    transform: rotate(-20deg);
+    opacity: 0.2;
+    
+}
+.icon-feather-title{
+    position: absolute;
+    left: 56.5vw;
+    top: 5vh;
+    font-size: 8vh;
+    transition-duration: 1s;
+}
+#title-task:hover{
+    .icon-feather-title{
+        animation: writing 2s infinite;
+        animation-delay: 0.3s;
+    }
+}
+
+.check-position{
+    cursor: pointer;
+   font-size: 8vh;
+   position: absolute;
+   left: 23vw;
+   color: #5de253;
+   padding: 0;
+   margin: 0;
+   width: auto;
+   height: auto;
+}
+
+@keyframes writing{
+    30%{
+        left: 53.5vw; 
+        transform: rotate(-15deg);
+    }    
+    60%{
+        left: 56.5vw; 
+    }
+    100%{
+        left: 56.5vw;
+    }
+    
+}
