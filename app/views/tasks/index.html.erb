@@ -1,61 +1,63 @@
 <div class="col-custom justify-content-center d-flex align-items-center header-custom">
-    <i class="fas fa-tasks bg-logo-tasks"></i>
-    <i class="fas fa-feather-alt bg-logo-feather"></i>
-    <div class="navbar-custom">
-      <div class="row-custom center justify-content-center-custom">
-        <div class="col-custom"> 
-          <h1 id="title-task">Lista de Tarefas
-            <i class="fas fa-tasks icon-tasks-title "></i>
-            <i class="fas fa-feather-alt icon-feather-title"></i>
-          </h1>
-        </div>
-      </div>
-      <div class="input-custom row-custom">
-        <input class="add-task py-4" type="text" name="Nome" size="40" placeholder="Adicionar tarefa..."/>
-        <button class='icon-square plus'>
-          <i class="fas fa-plus rotate-custom"></i> 
-        </button>
+  <i class="fas fa-tasks bg-logo-tasks"></i>
+  <i class="fas fa-feather-alt bg-logo-feather"></i>
+  <div class="navbar-custom">
+    <div class="row-custom center justify-content-center-custom">
+      <div class="col-custom"> 
+        <h1 id="title-task">Lista de Tarefas
+          <i class="fas fa-tasks icon-tasks-title "></i>
+          <i class="fas fa-feather-alt icon-feather-title"></i>
+        </h1>
       </div>
     </div>
-  </div>
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: <%= @percent_completed %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-  </div>
-  <div class="content-custom col-custom">
-    <% @tasks.each do |task| %>
-      <div class="container-custom">
-      <div onclick='checar(document.querySelector("check-position").value)' class='check-position'><i class="far fas fa-check-square check-icon"></i></div>
-        <div class="row-custom justify-content-between">
-          <div class="col-custom"> 
-            <small><%= l(task.created_at, format: '%d/%m/%Y - %H:%M:%S') %> </small>
-          </div>
-        </div>
-        <div class="row-custom justify-content-between-custom">
-          <h3><%= task.name %></h3>
-          <div class='options-custom'>
-            <i class="fas fa-pen-square icon-pen"></i>
-            <div class='icon-square trash'>
-              <i class="fas fa-trash"></i>
-            </div>
-          </div>
-        </div>
+    <%= form_with(model: @task, local: true) do |f| %>
+      <div class="input-custom row-custom">
+        <%= f.text_field :name, class:"add-task py-4", placeholder:"Adicionar tarefa..." %>
+        <%= f.submit class:'icon-square plus' do %>
+          <i class="fas fa-plus rotate-custom"></i>
+        <% end %>
       </div>
     <% end %>
   </div>
+</div>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: <%= @percent_completed %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="content-custom col-custom">
+  <% @tasks.each do |task| %>
+    <div class="container-custom">
+    <div onclick='checar(document.querySelector("check-position").value)' class='check-position'><i class="far fas fa-check-square check-icon"></i></div>
+      <div class="row-custom justify-content-between">
+        <div class="col-custom"> 
+          <small><%= l(task.created_at, format: '%d/%m/%Y - %H:%M:%S') %> </small>
+        </div>
+      </div>
+      <div class="row-custom justify-content-between-custom">
+        <h3><%= task.name %></h3>
+        <div class='options-custom'>
+          <i class="fas fa-pen-square icon-pen"></i>
+          <div class='icon-square trash'>
+            <i class="fas fa-trash"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-  <script>
+<script>
 
-  function checar(value) {
-    
-    let check = document.querySelectorAll('.check-icon');
+function checar(value) {
+  
+  let check = document.querySelectorAll('.check-icon');
 
-    console.log(value)
+  console.log(value)
 
-    check[1].classList.remove('fas')
-    check[1].classList.remove('fa-check-square')
-    check[1].classList.add('far')
-    check[1].classList.add('fa-square')
-    check[1].style.col-customor = 'black'
-  }
+  check[1].classList.remove('fas')
+  check[1].classList.remove('fa-check-square')
+  check[1].classList.add('far')
+  check[1].classList.add('fa-square')
+  check[1].style.col-customor = 'black'
+}
 
-  </script>
+</script>

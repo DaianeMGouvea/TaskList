@@ -12,17 +12,14 @@ class TasksController < ApplicationController
 
   def percent_completed
     return 0 if @total_tasks == 0
-    (@completed_tasks.to_f / @total_tasks) * 100
+    (completed_tasks.to_f / total_tasks) * 100
   end
 
   def index
     @tasks = Task.all
-    p "total_tasks: #{total_tasks}"
-    p "completed_task: #{completed_tasks}"
+    percent_completed
 
-    @percent_completed = (completed_tasks.to_f / total_tasks) * 100
-
-    p "percent_completed: #{@percent_completed}"
+    @task = Task.new
   end
 
   def show
@@ -38,15 +35,11 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    
+    if @task.save
+      redirect_to(tasks_path)
     end
+    
   end
 
   def update
