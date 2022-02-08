@@ -38,9 +38,11 @@
       </div>
       <%= form_for task do |f| %>
       <div class="row-custom justify-content-between-custom">
-        <h3><%= f.text_field :name, placeholder: task.name, readonly: true %></h3>
+        <h3><%= f.text_field :name, placeholder: task.name, readonly: true, class: "edit-name" %></h3>
         <div class='options-custom'>
-          <i class="fas fa-pen-square icon-pen"></i>
+          <%= link_to edit_task_path(task), class:'btn-edit-task' do %>
+            <i class="fas fa-pen-square icon-pen"></i>
+          <% end %>
           <%= link_to task, method: :delete, class:'icon-square trash' do %>
             <i class="fas fa-trash"></i>
           <% end %>
