@@ -13,8 +13,10 @@
     <%= form_with(model: @task, local: true) do |f| %>
       <div class="input-custom row-custom">
         <%= f.text_field :name, class:"add-task py-4", placeholder:"Adicionar tarefa..." %>
-        <%= f.submit class:'icon-square plus' do %>
-          <i class="fas fa-plus rotate-custom"></i>
+        <%= button_tag(type: 'submit', class: 'icon-square plus') do %>
+          <div class='icon-square plus' >
+            <i class="fas fa-plus rotate-custom"></i>
+          </div>
         <% end %>
       </div>
     <% end %>
@@ -26,30 +28,34 @@
 <div class="content-custom col-custom">
   <% @tasks.each do |task| %>
     <div class="container-custom">
-    <div onclick='checar(document.querySelector("check-position").value)' class='check-position'><i class="far fas fa-check-square check-icon"></i></div>
+    <div onclick='checar()' class='check-position'>
+      <i class="far fas fa-check-square check-icon"></i>
+    </div>
       <div class="row-custom justify-content-between">
         <div class="col-custom"> 
           <small><%= l(task.created_at, format: '%d/%m/%Y - %H:%M:%S') %> </small>
         </div>
       </div>
+      <%= form_for task do |f| %>
       <div class="row-custom justify-content-between-custom">
-        <h3><%= task.name %></h3>
+        <h3><%= f.text_field :name, placeholder: task.name, readonly: true %></h3>
         <div class='options-custom'>
           <i class="fas fa-pen-square icon-pen"></i>
-          <div class='icon-square trash'>
+          <%= link_to task, method: :delete, class:'icon-square trash' do %>
             <i class="fas fa-trash"></i>
-          </div>
+          <% end %>
         </div>
       </div>
+      <% end %>
     </div>
   <% end %>
 </div>
 
 <script>
 
-function checar(value) {
+function checar() {
   
-  let check = document.querySelectorAll('.check-icon');
+  let check = document.querySelector('.check-icon');
 
   console.log(value)
 

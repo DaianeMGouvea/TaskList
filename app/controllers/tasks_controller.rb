@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-
+  
 
   def total_tasks
     @total_tasks ||= @tasks.count
@@ -12,21 +12,21 @@ class TasksController < ApplicationController
 
   def percent_completed
     return 0 if @total_tasks == 0
-    (completed_tasks.to_f / total_tasks) * 100
+    @percent_completed = (completed_tasks.to_f / total_tasks()) * 100
   end
 
   def index
     @tasks = Task.all
     percent_completed
 
-    @task = Task.new
+    new
   end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = Task.new  
   end
 
   def edit
@@ -34,18 +34,22 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-
-    
-    if @task.save
-      redirect_to(tasks_path)
-    end
-    
+    @task.status = 'Aberto'
+    @task.completed = 0
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to tasks_path }
+      else
+        format.html { redirect_to tasks_path, notice: "Insira um nome a tarefa" }
+        format.json { render json: @task.errors }
+      end
+    end   
   end
 
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
+        format.html { redirect_to tasks_path, notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +62,7 @@ class TasksController < ApplicationController
     @task.destroy
 
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
+      format.html { redirect_to tasks_path, notice: "Task was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -69,6 +73,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:name, :status, :completed)
+      params.require(:task).permit(:name)
     end
 end
